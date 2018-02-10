@@ -5,12 +5,12 @@ classTbl <- setRefClass(
     tblSchema = "character",
     tblName = "character",
     tblCols = "list",
+    tblEdge = "list",
     tblChek = "numeric",
-    tblPrev = "character",
-    tblEdge = "list"
+    tblPrev = "character"
   ),
   methods = list(
-    initialize = function(tblDb, tblSchema, tblName, tblCols, tblChek=0, tblPrev="",tblEdge)
+    initialize = function(tblDb, tblSchema, tblName, tblCols, tblEdge ,tblChek=0, tblPrev="")
     {
       tblDb <<- tblDb
       tblSchema <<- tblSchema
