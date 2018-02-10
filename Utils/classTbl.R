@@ -9,7 +9,7 @@ classTbl <- setRefClass(
     tblPrev = "character"
   ),
   methods = list(
-    initialize = function(tblDb, tblSchema, tblName, tblCols, tblChek, tblPrev)
+    initialize = function(tblDb, tblSchema, tblName, tblCols, tblChek=0, tblPrev="")
     {
       tblDb <<- tblDb
       tblSchema <<- tblSchema
