@@ -6,10 +6,11 @@ classTbl <- setRefClass(
     tblName = "character",
     tblCols = "list",
     tblChek = "numeric",
-    tblPrev = "character"
+    tblPrev = "character",
+    tblEdge = "list"
   ),
   methods = list(
-    initialize = function(tblDb, tblSchema, tblName, tblCols, tblChek=0, tblPrev="")
+    initialize = function(tblDb, tblSchema, tblName, tblCols, tblChek=0, tblPrev="",tblEdge)
     {
       tblDb <<- tblDb
       tblSchema <<- tblSchema
@@ -17,6 +18,7 @@ classTbl <- setRefClass(
       tblCols <<- tblCols
       tblChek <<- tblChek
       tblPrev <<- tblPrev
+      tblEdge <<- tblEdge
     },
     hello = function()
     {
