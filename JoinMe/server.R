@@ -12,16 +12,85 @@ library(shiny)
 # Define server logic required to draw a histogram
 shinyServer(function(input, output) {
    
-  output$distPlot <- renderPlot({
-    
-    # generate bins based on input$bins from ui.R
-    x    <- faithful[, 2] 
-    bins <- seq(min(x), max(x), length.out = input$bins + 1)
-    
-    # draw the histogram with the specified number of bins
-    hist(x, breaks = bins, col = 'darkgray', border = 'white')
-    
-  })
   output$test <- renderText('Testing')
+  
+  textDataBases.A <- as.character(unique(info.schema[,1]))
+  
+  output$chooseDatabase <- reactiveUI(function(){
+    textDataBases <- textDataBases.A
+    selectizeInput("getDatabase",
+                "Choose a Database",
+                choices=textDataBases,
+                options=list(
+                  placeholder = "Please Select",
+                  onInitialize = I('function() { this.setValue(""); }')
+                )
+    )
+  })
+  output$chooseSchema <- reactiveUI(function(){
+    textSchemas <- as.character(unique(info.schema[which(info.schema[,1]==input$getDatabase),2]))
+    selectizeInput("getSchema", 
+                "Choose a Schema", 
+                choices = as.list(textSchemas),
+                options=list(
+                  placeholder = "Please Select",
+                  onInitialize = I('function() { this.setValue(""); }')
+                )
+      )
+    })
+  output$chooseTable <- reactiveUI(function(){
+    textTables <- as.character(unique(info.schema[which(info.schema[,2]==input$getSchema),3]))
+    selectizeInput("getTable", 
+                "Choose a Table", 
+                choices = textTables,
+                options=list(
+                  placeholder = "Please Select",
+                  onInitialize = I('function() { this.setValue(""); }')
+                )
+      )
+  })
+  
+  
+  output$chooseDatabaseEnd <- reactiveUI(function(){
+    textDataBases <- textDataBases.A
+    selectizeInput("getDatabaseEnd",
+                   "Choose a Database",
+                   choices=textDataBases,
+                   options=list(
+                     placeholder = "Please Select",
+                     onInitialize = I('function() { this.setValue(""); }')
+                   )
+    )
+  })
+  output$chooseSchemaEnd <- reactiveUI(function(){
+    textSchemas <- as.character(unique(info.schema[which(info.schema[,1]==input$getDatabaseEnd),2]))
+    selectizeInput("getSchemaEnd", 
+                   "Choose a Schema", 
+                   choices = as.list(textSchemas),
+                   options=list(
+                     placeholder = "Please Select",
+                     onInitialize = I('function() { this.setValue(""); }')
+                   )
+    )
+  })
+  output$chooseTableEnd <- reactiveUI(function(){
+    textTables <- as.character(unique(info.schema[which(info.schema[,2]==input$getSchemaEnd),3]))
+    selectizeInput("getTableEnd", 
+                   "Choose a Table", 
+                   choices = textTables,
+                   options=list(
+                     placeholder = "Please Select",
+                     onInitialize = I('function() { this.setValue(""); }')
+                   )
+    )
+  })
+  
+  
+  
+  
+  
+  
+  
+  
   
 })

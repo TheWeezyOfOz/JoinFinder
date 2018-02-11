@@ -18,18 +18,20 @@ shinyUI(fluidPage(
   # Sidebar with a slider input for number of bins 
   sidebarLayout(
     sidebarPanel(
-       sliderInput("bins",
-                   "Number of bins:",
-                   min = 1,
-                   max = 50,
-                   value = 30),
-       selectInput("variable", "Variable:",
-                   c("one" = 1, "two" = 2, "three" = 3))
+      h4("Start Table"),
+       uiOutput("chooseDatabase"),
+       uiOutput("chooseSchema"),
+       uiOutput("chooseTable"),
+      br(),
+      h4("End Table"),
+       uiOutput("chooseDatabaseEnd"),
+       uiOutput("chooseSchemaEnd"),
+       uiOutput("chooseTableEnd")
     ),
+
     
     # Show a plot of the generated distribution
     mainPanel(
-       plotOutput("distPlot"),
        h1(textOutput("test"))
     )
   )
