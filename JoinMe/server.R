@@ -1,5 +1,8 @@
+setwd(dirname(dirname(rstudioapi::getActiveDocumentContext()$path)))
 
 library(shiny)
+
+source("Utils/initInfoSchema.R")
 
 shinyServer(function(input, output) {
    
