@@ -23,8 +23,9 @@ shinyUI(fluidPage(
                    min = 1,
                    max = 50,
                    value = 30),
-       selectInput("variable", "Variable:",
-                   c("one" = 1, "two" = 2, "three" = 3))
+       uiOutput("chooseDatabase"),
+       uiOutput("chooseSchema"),
+       uiOutput("chooseTable")
     ),
     
     # Show a plot of the generated distribution

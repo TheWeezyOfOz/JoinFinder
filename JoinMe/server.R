@@ -24,4 +24,21 @@ shinyServer(function(input, output) {
   })
   output$test <- renderText('Testing')
   
+  #if input$textDataBases isn't null then filter info.schema to get only relevant scheams
+  textDataBases <- as.character(unique(info.schema[,1]))
+  
+  #if input$textSchemas isn't null then filter info.schema to get only relevent tables
+  textSchemas <- as.character(unique(info.schema[,2]))
+  textTables <- as.character(unique(info.schema[,3]))
+  
+  output$chooseDatabase <- reactiveUI(function(){
+    selectInput("getDatabase","Choose a Database",choices=textDataBases)
+  })
+  output$chooseSchema <- reactiveUI({function()
+    selectInput("getSchema", "Choose a Schema", choices = textSchemas)
+    })
+  output$chooseTable <- reactiveUI(function(){
+    selectInput("getTable", "Choose a Table", choices = textTables)
+  })
+  
 })
